@@ -7,6 +7,11 @@ export const UserSchemaValidate = Joi.object({
     password: Joi.string().required()
 })
 
+export const loginValidate = Joi.object({
+    email: Joi.string().required(),
+    password: Joi.string().required()
+})
+
 interface IUsers {
     name: string,
     email: string,
