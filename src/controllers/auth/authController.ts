@@ -13,7 +13,7 @@ export const login = async (req: Request, res: Response) => {
   /* get user data */
   const { error, value } = loginValidate.validate(payload);
   if (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 
   const dataUser = await getUserSingle({
@@ -39,7 +39,7 @@ export const login = async (req: Request, res: Response) => {
   const token = jwt.sign(
     { 
         id: dataUser.data[0]?._id, 
-        userName: dataUser.data[0]?.name, 
+        name: dataUser.data[0]?.name, 
         email: dataUser.data[0]?.email
     },
     process.env.JWT_SECRET!, // Make sure to set this in your .env file

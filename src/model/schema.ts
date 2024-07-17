@@ -4,7 +4,8 @@ import Joi from "joi";
 export const UserSchemaValidate = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-    password: Joi.string().required()
+    phone: Joi.string().required(),
+    password: Joi.string().required(),
 })
 
 export const loginValidate = Joi.object({
@@ -15,6 +16,7 @@ export const loginValidate = Joi.object({
 interface IUsers {
     name: string,
     email: string,
+    phone: string,
     password: string
 }
 
@@ -24,6 +26,10 @@ const usersSchema = new Schema<IUsers>({
         required: true
     },
     email: {
+        type: String,
+        required: true
+    },
+    phone: {
         type: String,
         required: true
     },

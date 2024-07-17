@@ -1,8 +1,17 @@
+// src/middlewares/authMiddleware.ts
+
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-interface AuthRequest extends Request {
-  user?: { userId: string; email: string };
+interface JwtPayload {
+  id: string;
+  name: string;
+  email: string;
+  // Add any other fields you included in your token
+}
+
+export interface AuthRequest extends Request {
+  user?: JwtPayload;
 }
 
 export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
@@ -17,7 +26,7 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string; email: string };
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
     req.user = decoded;
     next();
   } catch (error) {

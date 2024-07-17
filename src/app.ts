@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}))
 app.use('/', userRoute);
 
 app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, TypeScript Express! !!!');
+    return res.send('Hello, TypeScript Express! !!!');
 });
 
 db.then(()=> {
