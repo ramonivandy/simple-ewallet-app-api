@@ -75,7 +75,10 @@ export const createUser = async (req: Request, res: Response) => {
     balance: balance.data?.balance,
     history_id: history.data?._id,
   };
-  return res.status(201).json(returnArr);
+  return res.status(201).json({
+    success: true,
+    data: returnArr
+  });
 };
 
 export const dashboard = async (req: AuthRequest, res: Response) => {
@@ -120,6 +123,8 @@ export const updateBalance = async (req: AuthRequest, res: Response) => {
   const userBalance = await getUserBalance({
     user_id: Types.ObjectId.createFromHexString(id),
   });
+
+  console.log(userBalance)
   if (!userBalance || !userBalance.data) {
     return res.status(404).json({ error: "User balance not found" });
   }

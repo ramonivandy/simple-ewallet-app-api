@@ -5,10 +5,10 @@ import { authMiddleware } from "../middleware/authMiddleware";
 
 const userRoute = Router();
 
-userRoute.post('/createUser', createUser)
-userRoute.post('/login', login)
+userRoute.post('/api/createUser', createUser)
+userRoute.post('/api/login', login)
 
-userRoute.get('/dashboard', authMiddleware, dashboard)
-userRoute.put('/update-balance', authMiddleware, updateBalance)
+userRoute.get('/api/dashboard', authMiddleware, dashboard)
+userRoute.put('/api/update-balance', authMiddleware, updateBalance)
 
 export default userRoute
